@@ -72,30 +72,28 @@
             box-shadow: 0 4px 8px rgba(150, 100, 200, 0.2);
         }
         
-        .heart {
+        .video-overlay {
             position: fixed;
-            font-size: 24px;
-            color: #ff69b4;
-            opacity: 0;
-            animation: float 6s linear infinite;
-            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            display: none;
         }
         
-        @keyframes float {
-            0% {
-                transform: translateY(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh);
-                opacity: 0;
-            }
+        .video-container {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+        }
+        
+        .video-container video {
+            width: 100%;
+            border-radius: 10px;
         }
         
         .footer {
@@ -152,37 +150,27 @@
     </div>
     
     <div class="footer">
+        <p>Ung mukha mo nalng sna e lalagay ko jan sa click for a surprise button pero wag, video ko nlang pla mas maganda HAHAHA</p>
         <p>Made with ❤️ just for you</p>
+    </div>
+    
+    <div class="video-overlay" id="video-overlay">
+        <div class="video-container">
+            <video id="video" controls>
+                <source src="TiktokHarry.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
     </div>
     
     <script>
         document.getElementById('surprise-btn').addEventListener('click', function() {
-            // Create floating hearts
-            for (let i = 0; i < 20; i++) {
-                setTimeout(function() {
-                    createHeart();
-                }, i * 300);
-            }
-            
-            // Show a special message
-            alert("You're the best friend anyone could ask for! 💕");
+            document.getElementById('video-overlay').style.display = 'flex';
         });
         
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.innerHTML = '❤️';
-            
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3) + 3 + 's';
-            
-            document.body.appendChild(heart);
-            
-            // Remove heart after animation
-            setTimeout(function() {
-                heart.remove();
-            }, 6000);
-        }
+        document.getElementById('video-overlay').addEventListener('click', function() {
+            this.style.display = 'none';
+        });
     </script>
 </body>
 </html>
